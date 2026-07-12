@@ -1,0 +1,71 @@
+# Nginx config template. `${PORT}` is substituted at container start by the
+# entrypoint (envsubst), so Nginx listens on the port Render assigns.
+
+worker_processes auto;
+error_log /dev/stderr warn;
+pid /run/nginx/nginx.pid;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    access_log /dev/stdout;
+    sendfile   on;
+    tcp_nopush on;
+    keepalive_timeout 65;
+    server_tokens off;
+
+    # Allow image/gallery uploads (kept in sync with php.ini limits).
+    client_max_body_size 20m;
+
+    gzip on;
+    gzip_comp_level 5;
+    gzip_min_length 256;
+    gzip_types
+        text/plain text/css application/javascript application/json
+        application/xml image/svg+xml font/woff2;
+
+    server {
+        listen ${PORT} default_server;
+        listen [::]:${PORT} default_server;
+        server_name _;
+
+        root /var/www/html/public;
+        index index.php;
+
+        charset utf-8;
+
+        # Front controller pattern — everything routes through index.php.
+        location / {
+            try_files $uri $uri/ /index.php?$query_string;
+        }
+
+        # Long-cache the hashed Vite build assets.
+        location /build/ {
+            expires 1y;
+            add_header Cache-Control "public, immutable";
+            try_files $uri =404;
+        }
+
+        location = /favicon.ico { access_log off; log_not_found off; }
+
+        location ~ \.php$ {
+            include fastcgi_params;
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_index index.php;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_param PATH_INFO $fastcgi_path_info;
+            fastcgi_hide_header X-Powered-By;
+            fastcgi_read_timeout 60;
+        }
+
+        # Deny access to hidden files except ACME challenges.
+        location ~ /\.(?!well-known).* {
+            deny all;
+        }
+    }
+}

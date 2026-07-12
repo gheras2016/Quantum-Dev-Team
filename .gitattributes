@@ -1,5 +1,10 @@
 * text=auto eol=lf
 
+# Docker/runtime scripts must stay LF even on Windows checkouts.
+*.sh        text eol=lf
+Dockerfile  text eol=lf
+docker/**   text eol=lf
+
 *.blade.php diff=html
 *.css diff=css
 *.html diff=html

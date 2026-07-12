@@ -1,0 +1,58 @@
+# Render Blueprint — provisions the web service + a PostgreSQL database.
+# Deploy with: Render Dashboard → New → Blueprint → point at this repo.
+# https://render.com/docs/blueprint-spec
+
+databases:
+  - name: quantum-db
+    databaseName: quantum
+    user: quantum
+    plan: free            # free Postgres (expires after 90 days; upgrade for production)
+
+services:
+  - type: web
+    name: quantum-dev-team
+    runtime: docker
+    plan: free
+    region: frankfurt      # closest Render region to the Middle East
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: APP_NAME
+        value: "Quantum Dev Team"
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      # Generate once locally with:  php artisan key:generate --show
+      # then paste it in the Render dashboard (kept out of git).
+      - key: APP_KEY
+        sync: false
+      # Set to the service's public URL, e.g. https://quantum-dev-team.onrender.com
+      - key: APP_URL
+        sync: false
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: LOG_LEVEL
+        value: warning
+      # --- Database (PostgreSQL) ---
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DATABASE_URL
+        fromDatabase:
+          name: quantum-db
+          property: connectionString
+      # --- Runtime services ---
+      - key: SESSION_DRIVER
+        value: file
+      - key: CACHE_DRIVER
+        value: file
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: FILESYSTEM_DISK
+        value: public
+      - key: MAIL_MAILER
+        value: log
+      # Run migrations automatically on each deploy (set to false to disable).
+      - key: RUN_MIGRATIONS
+        value: "true"
