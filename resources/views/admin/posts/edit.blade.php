@@ -1,0 +1,17 @@
+@extends('admin.layouts.app')
+
+@section('title', __('messages.posts'))
+
+@section('content')
+    <x-admin.page-header :title="__('messages.edit').' — '.$post->translate('title')" />
+
+    <form method="POST" action="{{ route('admin.posts.update', $post) }}" enctype="multipart/form-data" class="max-w-4xl rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100 dark:bg-dark-100 dark:ring-white/5">
+        @csrf
+        @method('PUT')
+        @include('admin.posts._form')
+        <div class="mt-6 flex gap-2">
+            <button type="submit" class="btn-primary text-sm">{{ __('messages.update') }}</button>
+            <a href="{{ route('admin.posts.index') }}" class="btn-secondary text-sm">{{ __('messages.cancel') }}</a>
+        </div>
+    </form>
+@endsection
