@@ -9,7 +9,9 @@
 <body class="flex min-h-screen items-center justify-center bg-gray-100 px-4 font-sans dark:bg-dark-300">
     <div class="w-full max-w-md">
         <div class="mb-6 text-center">
-            <span class="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-600 to-primary-400 text-2xl font-bold text-white">Q</span>
+            <div class="mb-3 flex justify-center">
+                <x-site-logo height="h-20" box="h-20 w-20" rounded="rounded-2xl" text="text-4xl" />
+            </div>
             <h1 class="text-2xl font-bold text-gray-900 dark:text-white">{{ __('messages.admin_login') }}</h1>
             <p class="mt-1 text-sm text-gray-500">{{ __('messages.please_login_to_continue') }}</p>
         </div>

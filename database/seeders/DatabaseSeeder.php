@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             $this->call([
                 DemoContentSeeder::class,
                 EngagementSeeder::class,
+                InboxSeeder::class,
             ]);
         } catch (\Throwable $e) {
             $this->command?->warn('Demo content seeding skipped: '.$e->getMessage());

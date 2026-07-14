@@ -16,9 +16,9 @@
                 <div class="shrink-0">
                     @if (! empty($values['site_logo']))
                         <img src="{{ asset('storage/'.$values['site_logo']) }}" alt="logo"
-                             class="h-16 w-16 rounded-xl object-contain ring-1 ring-gray-200 dark:ring-white/10">
+                             class="h-20 w-auto max-w-[220px] rounded-xl object-contain ring-1 ring-gray-200 dark:ring-white/10">
                     @else
-                        <span class="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-primary-600 to-primary-400 text-2xl font-bold text-white">Q</span>
+                        <span class="flex h-20 w-20 items-center justify-center rounded-xl bg-gradient-to-br from-primary-600 to-primary-400 text-3xl font-bold text-white">Q</span>
                     @endif
                 </div>
                 <div class="flex-1">

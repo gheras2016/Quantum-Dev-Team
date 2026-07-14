@@ -4,10 +4,13 @@ namespace Database\Seeders;
 
 use App\Models\Faq;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Models\Testimonial;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
+/**
+ * Seeds Arabic blog posts (with tags), client testimonials and FAQs.
+ */
 class EngagementSeeder extends Seeder
 {
     public function run(): void
@@ -19,41 +22,53 @@ class EngagementSeeder extends Seeder
 
     private function seedPosts(): void
     {
+        $tags = Tag::pluck('id')->all();
+
+        // [slug, titleAr, titleEn, excerptAr, bodyAr]
         $posts = [
-            ['Why Laravel Is Our Framework of Choice', 'لماذا نختار Laravel كإطار عمل أساسي'],
-            ['5 Signs Your Business Needs a Custom System', '5 علامات تدل على حاجة عملك لنظام مخصص'],
-            ['A Practical Guide to Mobile App Development', 'دليل عملي لتطوير تطبيقات الجوال'],
+            ['why-laravel', 'لماذا نختار Laravel كإطار عمل أساسي', 'Why We Choose Laravel', 'نستعرض الأسباب التي تجعل Laravel خيارنا الأول لبناء الأنظمة الاحترافية.', 'يُعدّ Laravel من أقوى أُطر تطوير الويب وأكثرها نضجاً، إذ يوفّر بنية منظّمة وأدوات جاهزة تسرّع التطوير دون التفريط في الجودة أو الأمان. في Quantum Dev Team نعتمد عليه لبناء أنظمة قابلة للتوسع والصيانة، مستفيدين من نظام حزمه الغني ومجتمعه الكبير.'],
+            ['custom-system-signs', 'علامات تدل على حاجة عملك لنظام مخصص', '5 Signs You Need a Custom System', 'كيف تعرف أن الحلول الجاهزة لم تعد كافية لعملك؟', 'عندما تبدأ العمليات اليدوية في التسبب بالأخطاء والتأخير، وعندما تعجز الأنظمة الجاهزة عن تلبية احتياجاتك الخاصة، يصبح النظام المخصص استثماراً ضرورياً. نناقش في هذا المقال أبرز العلامات التي تدل على حاجتك لحل تقني مصمّم خصيصاً لعملك.'],
+            ['mobile-guide', 'دليل عملي لتطوير تطبيقات الجوال', 'A Practical Guide to Mobile Apps', 'خطوات أساسية لبناء تطبيق جوال ناجح من الفكرة إلى المتجر.', 'يمرّ تطوير تطبيق الجوال بمراحل مترابطة تبدأ بتحليل الفكرة ودراسة المستخدمين، ثم التصميم والتطوير والاختبار، وصولاً إلى النشر والدعم. نشارك في هذا الدليل خلاصة تجربتنا في بناء تطبيقات عالية الأداء لنظامي iOS و Android.'],
+            ['systems-analysis-importance', 'أهمية تحليل الأنظمة قبل بدء التطوير', 'Why Systems Analysis Matters', 'لماذا يوفّر التحليل الجيد الوقت والمال ويضمن نجاح المشروع؟', 'التحليل الدقيق للمتطلبات هو حجر الأساس لأي مشروع ناجح. فهو يقلّل من التغييرات المكلفة لاحقاً، ويضمن أن الحل التقني يعالج المشكلة الحقيقية. نوضّح كيف نحوّل احتياجات العميل إلى مواصفات فنية واضحة قابلة للتنفيذ.'],
+            ['web-security-practices', 'أفضل ممارسات أمان تطبيقات الويب', 'Web Security Best Practices', 'إجراءات أساسية لحماية أنظمتك وبيانات عملائك.', 'الأمان ليس خياراً بل ضرورة. من التحقق من المدخلات وتشفير البيانات، إلى إدارة الصلاحيات وتحديث المكتبات باستمرار، نستعرض أهم الممارسات التي نلتزم بها لحماية الأنظمة من الثغرات الشائعة.'],
+            ['choosing-database', 'كيف تختار قاعدة البيانات المناسبة لمشروعك', 'Choosing the Right Database', 'مقارنة عملية تساعدك على اتخاذ القرار الصحيح.', 'يعتمد اختيار قاعدة البيانات على طبيعة مشروعك وحجم بياناته ونمط استخدامها. نقارن في هذا المقال بين الخيارات الشائعة مثل MySQL و PostgreSQL، ونوضّح متى يكون كل منها الخيار الأمثل.'],
         ];
 
-        foreach ($posts as $i => [$en, $ar]) {
-            Post::firstOrCreate(['slug' => Str::slug($en)], [
-                'title' => ['en' => $en, 'ar' => $ar],
-                'excerpt' => ['en' => 'A short overview of the topic and why it matters for your project.', 'ar' => 'نظرة موجزة على الموضوع وأهميته لمشروعك.'],
-                'body' => [
-                    'en' => str_repeat('This is a demo article body paragraph explaining the topic in depth. ', 20),
-                    'ar' => str_repeat('هذه فقرة تجريبية لمحتوى المقال تشرح الموضوع بالتفصيل. ', 20),
-                ],
+        foreach ($posts as $i => [$slug, $titleAr, $titleEn, $excerptAr, $bodyAr]) {
+            $post = Post::firstOrCreate(['slug' => $slug], [
+                'title' => ['ar' => $titleAr, 'en' => $titleEn],
+                'excerpt' => ['ar' => $excerptAr, 'en' => 'A concise overview of the topic and why it matters for your project.'],
+                'body' => ['ar' => $bodyAr, 'en' => $bodyAr],
                 'status' => 'published',
-                'featured' => $i === 0,
-                'published_at' => now()->subDays($i * 3),
+                'featured' => $i < 2,
+                'views_count' => random_int(80, 950),
+                'published_at' => now()->subDays($i * 4 + 1),
             ]);
+
+            $post->tags()->syncWithoutDetaching(
+                collect($tags)->shuffle()->take(3)->all()
+            );
         }
     }
 
     private function seedTestimonials(): void
     {
+        // [name, title, company, rating, contentAr]
         $items = [
-            ['Khalid Al-Otaibi', 'CEO', 'Nova Retail', 5, 'The team delivered our platform ahead of schedule with outstanding quality.', 'سلّم الفريق منصتنا قبل الموعد وبجودة استثنائية.'],
-            ['Mona Al-Harbi', 'Product Manager', 'BrightApps', 5, 'Professional, responsive and truly invested in our success.', 'احترافية وسرعة استجابة واهتمام حقيقي بنجاحنا.'],
-            ['Yousef Karim', 'Founder', 'TechNest', 4, 'Great communication throughout the project. Highly recommended.', 'تواصل ممتاز طوال المشروع. أنصح بهم بشدة.'],
+            ['خالد العتيبي', 'المدير التنفيذي', 'مجموعة نوفا التجارية', 5, 'سلّم الفريق منصتنا قبل الموعد المحدد وبجودة استثنائية فاقت توقعاتنا.'],
+            ['منى الحربي', 'مديرة المنتجات', 'شركة برايت للتطبيقات', 5, 'احترافية عالية وسرعة استجابة واهتمام حقيقي بنجاح مشروعنا. أنصح بهم بشدة.'],
+            ['يوسف كريم', 'مؤسس', 'شركة تك نست', 4, 'تواصل ممتاز وشفاف طوال مراحل المشروع، والتزام واضح بالمواعيد.'],
+            ['سارة عبدالله', 'مديرة العمليات', 'مؤسسة الرؤية الرقمية', 5, 'نظام الموارد البشرية الذي طوّروه غيّر طريقة عملنا للأفضل تماماً.'],
+            ['أحمد الفكي', 'مدير تقنية المعلومات', 'بنك التنمية الصناعية', 5, 'فريق يفهم متطلبات المؤسسات الكبيرة ويقدّم حلولاً آمنة وقابلة للتوسع.'],
+            ['ليلى حسن', 'صاحبة مشروع', 'متجر لمسة للأزياء', 4, 'متجري الإلكتروني أصبح أسرع وأسهل في الإدارة بعد تعاملي معهم.'],
         ];
 
-        foreach ($items as $i => [$name, $title, $company, $rating, $en, $ar]) {
+        foreach ($items as $i => [$name, $title, $company, $rating, $contentAr]) {
             Testimonial::firstOrCreate(['author_name' => $name], [
                 'author_title' => $title,
                 'author_company' => $company,
                 'rating' => $rating,
-                'content' => ['en' => $en, 'ar' => $ar],
+                'content' => ['ar' => $contentAr, 'en' => 'The team delivered outstanding quality and professional service.'],
                 'order' => $i,
                 'is_active' => true,
             ]);
@@ -62,18 +77,24 @@ class EngagementSeeder extends Seeder
 
     private function seedFaqs(): void
     {
+        // [questionAr, answerAr]
         $items = [
-            ['How long does a typical project take?', 'كم يستغرق المشروع عادةً؟', 'It depends on scope, but most projects take between 4 and 12 weeks.', 'يعتمد على حجم المشروع، لكن معظم المشاريع تستغرق بين 4 و12 أسبوعاً.'],
-            ['Do you provide support after delivery?', 'هل تقدمون دعماً بعد التسليم؟', 'Yes, we offer ongoing maintenance and technical support packages.', 'نعم، نوفر باقات صيانة ودعم فني مستمر.'],
-            ['Can you work with our existing system?', 'هل يمكنكم العمل مع نظامنا الحالي؟', 'Absolutely. We can integrate with or extend your current systems.', 'بالتأكيد، يمكننا التكامل مع أنظمتكم الحالية أو تطويرها.'],
+            ['كم يستغرق تنفيذ المشروع عادةً؟', 'يعتمد على حجم المشروع ومتطلباته، لكن معظم المشاريع تستغرق بين 4 و12 أسبوعاً. نحدّد الجدول الزمني بدقة بعد مرحلة تحليل المتطلبات.'],
+            ['هل تقدّمون دعماً فنياً بعد التسليم؟', 'نعم، نوفّر باقات صيانة ودعم فني مستمر لضمان استقرار النظام وتطويره مع نمو أعمالك.'],
+            ['هل يمكنكم العمل على نظامنا الحالي؟', 'بالتأكيد، يمكننا التكامل مع أنظمتكم الحالية أو تطويرها وإضافة مزايا جديدة إليها.'],
+            ['كيف تضمنون جودة الكود؟', 'نتّبع معايير برمجية صارمة ومراجعة دورية للكود واختبارات آلية لضمان جودة واستقرار المنتج.'],
+            ['هل تلتزمون بسرية بيانات العميل؟', 'نعم، سرية بيانات عملائنا أولوية قصوى، ونلتزم بأفضل معايير الأمان وحماية المعلومات.'],
+            ['ما التقنيات التي تستخدمونها؟', 'نعتمد على Laravel و PHP في الواجهة الخلفية، و Vue.js و Livewire و Tailwind في الواجهات، بالإضافة إلى Flutter لتطبيقات الجوال.'],
+            ['هل تقدّمون استضافة للمشاريع؟', 'نعم، نوفّر حلول استضافة سحابية موثوقة مع الإعداد والنشر والمتابعة المستمرة.'],
+            ['كيف يمكنني البدء بمشروعي معكم؟', 'يمكنك تعبئة نموذج «اطلب مشروعك» أو التواصل معنا مباشرة، وسنرتّب جلسة لفهم احتياجاتك ووضع خطة تنفيذ.'],
         ];
 
-        foreach ($items as $i => [$qEn, $qAr, $aEn, $aAr]) {
+        foreach ($items as $i => [$questionAr, $answerAr]) {
             Faq::firstOrCreate(
                 ['order' => $i],
                 [
-                    'question' => ['en' => $qEn, 'ar' => $qAr],
-                    'answer' => ['en' => $aEn, 'ar' => $aAr],
+                    'question' => ['ar' => $questionAr, 'en' => 'Frequently asked question'],
+                    'answer' => ['ar' => $answerAr, 'en' => 'Please contact us for more details.'],
                     'is_active' => true,
                 ]
             );
