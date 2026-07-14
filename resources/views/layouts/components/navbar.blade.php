@@ -13,7 +13,7 @@
 <nav x-data="{ open: false }" class="sticky top-0 z-50 border-b border-gray-100 bg-white/90 backdrop-blur dark:border-white/5 dark:bg-dark-200/90">
     <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <a href="{{ route('home') }}" class="flex items-center gap-2">
-            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary-600 to-primary-400 text-lg font-bold text-white">Q</span>
+            <x-site-logo size="h-10 w-10" />
             <span class="text-lg font-bold">{{ __('messages.site_name') }}</span>
         </a>
 

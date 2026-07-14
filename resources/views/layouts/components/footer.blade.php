@@ -11,7 +11,7 @@
     <div class="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3 lg:px-8">
         <div>
             <div class="mb-4 flex items-center gap-2">
-                <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary-600 to-primary-400 font-bold text-white">Q</span>
+                <x-site-logo size="h-10 w-10" />
                 <span class="text-lg font-bold text-white">{{ __('messages.site_name') }}</span>
             </div>
             <p class="mb-5 max-w-xs text-sm text-gray-400">{{ __('messages.tagline') }}</p>

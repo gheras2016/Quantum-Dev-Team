@@ -20,7 +20,7 @@
        class="fixed inset-y-0 z-40 flex w-64 flex-col bg-dark-200 text-gray-300 transition-transform duration-200 lg:static lg:translate-x-0 rtl:right-0 ltr:left-0"
        x-cloak>
     <div class="flex h-16 items-center gap-2 border-b border-white/5 px-5">
-        <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary-600 to-primary-400 font-bold text-white">Q</span>
+        <x-site-logo size="h-9 w-9" rounded="rounded-lg" />
         <span class="font-bold text-white">{{ __('messages.admin_panel') }}</span>
     </div>
 

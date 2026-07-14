@@ -4,6 +4,11 @@ return [
     'general' => 'Contact Information',
     'hero' => 'Homepage Hero',
     'stats' => 'Statistics',
+    'branding' => 'Branding & Logo',
+
+    'site_logo' => 'Site Logo',
+    'logo_hint' => 'PNG, SVG or WEBP — transparent background recommended, max 2 MB.',
+    'remove_logo' => 'Remove current logo and revert to default',
 
     'site_email' => 'Email',
     'site_phone' => 'Phone',
