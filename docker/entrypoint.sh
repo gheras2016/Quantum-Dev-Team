@@ -40,11 +40,13 @@ if [ "${RUN_MIGRATIONS:-true}" = "true" ]; then
     php artisan migrate --force || echo "WARNING: migrations failed, continuing startup."
 fi
 
-# Seed roles, settings, demo content and the super admin. Set RUN_SEED=true in
-# the environment to enable. Seeders are idempotent (firstOrCreate), so it is
-# safe to leave on across deploys.
-if [ "${RUN_SEED:-false}" = "true" ]; then
-    echo "Seeding database..."
+# Seed roles, settings, demo content and the super admin. Enabled by default so
+# a fresh deploy is immediately usable (admin account + demo content). Seeders
+# are idempotent (firstOrCreate), so it is safe to run on every deploy. Set
+# RUN_SEED=false once you start curating real content to stop demo data from
+# being recreated.
+if [ "${RUN_SEED:-true}" = "true" ]; then
+    echo "Seeding database (roles, settings, demo content, super admin)..."
     php artisan db:seed --force || echo "WARNING: seeding failed, continuing startup."
 fi
 
