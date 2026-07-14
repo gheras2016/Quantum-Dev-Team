@@ -22,7 +22,7 @@
             <div class="mx-auto mt-10 grid max-w-3xl grid-cols-3 gap-4 border-t border-white/20 pt-8 sm:mt-16 sm:gap-8 sm:pt-10">
                 @foreach (['projects' => $stats['projects'], 'clients' => $stats['clients'], 'years' => $stats['years']] as $key => $value)
                     <div>
-                        <div class="text-2xl font-bold sm:text-3xl md:text-4xl">{{ $value }}+</div>
+                        <div class="text-2xl font-bold sm:text-3xl md:text-4xl"><span data-count="{{ $value }}" data-suffix="+">0+</span></div>
                         <div class="mt-1 text-xs text-primary-100 sm:text-sm">{{ __('home.stats_'.$key) }}</div>
                     </div>
                 @endforeach

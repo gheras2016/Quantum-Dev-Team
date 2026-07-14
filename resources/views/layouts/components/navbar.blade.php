@@ -1,13 +1,14 @@
 @php
     $links = [
         'home' => route('home'),
+        'about' => route('about'),
         'services' => route('services'),
         'projects' => route('projects'),
         'blog' => route('blog'),
         'team' => route('team'),
         'contact' => route('contact'),
     ];
-    $routeNames = ['home' => 'home', 'services' => 'services', 'projects' => 'projects*', 'blog' => 'blog*', 'team' => 'team', 'contact' => 'contact'];
+    $routeNames = ['home' => 'home', 'about' => 'about', 'services' => 'services', 'projects' => 'projects*', 'blog' => 'blog*', 'team' => 'team', 'contact' => 'contact'];
 @endphp
 
 <nav x-data="{ open: false }" class="sticky top-0 z-50 border-b border-gray-100 bg-white/90 backdrop-blur dark:border-white/5 dark:bg-dark-200/90">
