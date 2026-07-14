@@ -17,11 +17,23 @@ class DatabaseSeeder extends Seeder
             EngagementSeeder::class,
         ]);
 
-        // Default super admin (change the password after first login).
+        // Default super admin. Credentials can be overridden with environment
+        // variables (recommended for a public demo so the password is not the
+        // repository default). If ADMIN_PASSWORD is provided it is (re)applied
+        // on every seed, allowing a password rotation via a redeploy.
+        $email = env('ADMIN_EMAIL', 'admin@quantum.test');
+
         $admin = User::firstOrCreate(
-            ['email' => 'admin@quantum.test'],
-            ['name' => 'Super Admin', 'password' => Hash::make('password')]
+            ['email' => $email],
+            [
+                'name' => env('ADMIN_NAME', 'Super Admin'),
+                'password' => Hash::make(env('ADMIN_PASSWORD', 'password')),
+            ]
         );
+
+        if (env('ADMIN_PASSWORD')) {
+            $admin->update(['password' => Hash::make(env('ADMIN_PASSWORD'))]);
+        }
 
         if (! $admin->hasRole('super_admin')) {
             $admin->assignRole('super_admin');

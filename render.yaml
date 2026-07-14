@@ -24,8 +24,11 @@ services:
         value: production
       - key: APP_DEBUG
         value: "false"
-      # Generate once locally with:  php artisan key:generate --show
-      # then paste it in the Render dashboard (kept out of git).
+      # REQUIRED for stable sessions. Generate once with
+      #   php artisan key:generate --show
+      # and paste the "base64:..." value in the Render dashboard.
+      # If left unset, the container generates a temporary key on each deploy
+      # so the app still boots, but users are logged out on every redeploy.
       - key: APP_KEY
         sync: false
       # Set to the service's public URL, e.g. https://quantum-dev-team.onrender.com
@@ -56,3 +59,13 @@ services:
       # Run migrations automatically on each deploy (set to false to disable).
       - key: RUN_MIGRATIONS
         value: "true"
+      # Seed roles, settings, demo content and the super admin on deploy.
+      # Idempotent, so it is safe to leave enabled for a demo environment.
+      - key: RUN_SEED
+        value: "true"
+      # Super admin login for the seeded account. Set a private password here
+      # (do NOT rely on the repo default) — re-seeding applies it.
+      - key: ADMIN_EMAIL
+        value: admin@quantum.test
+      - key: ADMIN_PASSWORD
+        sync: false
