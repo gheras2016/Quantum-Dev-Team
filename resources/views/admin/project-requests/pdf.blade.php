@@ -28,7 +28,7 @@
         <tr><td class="label">Email</td><td>{{ $projectRequest->email }}</td></tr>
         <tr><td class="label">WhatsApp</td><td>{{ $projectRequest->whatsapp ?: '—' }}</td></tr>
         <tr><td class="label">Project Type</td><td>{{ $projectRequest->project_type }}</td></tr>
-        <tr><td class="label">Budget Range</td><td>{{ $projectRequest->budget_range }}</td></tr>
+        <tr><td class="label">Timeline</td><td>{{ $projectRequest->timeline }}</td></tr>
         <tr><td class="label">Status</td><td>{{ ucfirst($projectRequest->status) }}</td></tr>
         <tr><td class="label">Submitted</td><td>{{ $projectRequest->created_at?->format('Y-m-d H:i') }}</td></tr>
     </table>

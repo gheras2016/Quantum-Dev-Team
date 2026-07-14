@@ -7,7 +7,7 @@ return [
     'email' => 'Email',
     'whatsapp' => 'WhatsApp Number',
     'project_type' => 'Project Type',
-    'budget_range' => 'Estimated Budget',
+    'timeline' => 'Desired Timeline',
     'description' => 'Project Description',
     'name_placeholder' => 'Enter your full name',
     'email_placeholder' => 'example@email.com',
@@ -19,12 +19,11 @@ return [
         'system' => 'Management System',
         'other' => 'Other',
     ],
-    'budget_ranges' => [
-        'under_5k' => 'Under $5,000',
-        '5k_10k' => '$5,000 - $10,000',
-        '10k_25k' => '$10,000 - $25,000',
-        '25k_50k' => '$25,000 - $50,000',
-        'over_50k' => 'Over $50,000',
+    'timelines' => [
+        'urgent' => 'Urgent (less than a month)',
+        '1_3_months' => '1 to 3 months',
+        '3_6_months' => '3 to 6 months',
+        'flexible' => 'Flexible / Not sure',
     ],
     'submit_request' => 'Submit Request',
 ];

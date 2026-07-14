@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\ProjectRequest;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -19,7 +20,7 @@ class ProjectRequestFormRequest extends FormRequest
             'email' => ['required', 'email', 'max:255'],
             'whatsapp' => ['nullable', 'string', 'max:50'],
             'project_type' => ['required', Rule::in(['web_app', 'mobile_app', 'system', 'other'])],
-            'budget_range' => ['required', Rule::in(['under_5k', '5k_10k', '10k_25k', '25k_50k', 'over_50k'])],
+            'timeline' => ['required', Rule::in(ProjectRequest::TIMELINES)],
             'description' => ['required', 'string', 'max:5000'],
         ];
     }

@@ -19,7 +19,7 @@
                     <div><dt class="text-sm text-gray-500">{{ __('messages.email') }}</dt><dd>{{ $projectRequest->email }}</dd></div>
                     <div><dt class="text-sm text-gray-500">WhatsApp</dt><dd dir="ltr">{{ $projectRequest->whatsapp ?? '—' }}</dd></div>
                     <div><dt class="text-sm text-gray-500">{{ __('request-project.project_type') }}</dt><dd>{{ __('request-project.project_types.'.$projectRequest->project_type) }}</dd></div>
-                    <div><dt class="text-sm text-gray-500">{{ __('request-project.budget_range') }}</dt><dd>{{ __('request-project.budget_ranges.'.$projectRequest->budget_range) }}</dd></div>
+                    <div><dt class="text-sm text-gray-500">{{ __('request-project.timeline') }}</dt><dd>{{ $projectRequest->timeline ? __('request-project.timelines.'.$projectRequest->timeline) : '—' }}</dd></div>
                 </dl>
                 <div>
                     <dt class="mb-1 text-sm text-gray-500">{{ __('request-project.description') }}</dt>

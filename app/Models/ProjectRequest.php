@@ -13,12 +13,14 @@ class ProjectRequest extends Model
 
     public const STATUSES = ['pending', 'in_review', 'approved', 'in_progress', 'completed', 'rejected'];
 
+    public const TIMELINES = ['urgent', '1_3_months', '3_6_months', 'flexible'];
+
     protected $fillable = [
         'name',
         'email',
         'whatsapp',
         'project_type',
-        'budget_range',
+        'timeline',
         'description',
         'status',
         'is_read',

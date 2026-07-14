@@ -53,26 +53,26 @@ class InboxSeeder extends Seeder
 
     private function seedProjectRequests(): void
     {
-        // [name, email, whatsapp, project_type, budget_range, description, status]
+        // [name, email, whatsapp, project_type, timeline, description, status]
         $requests = [
-            ['شركة الوفاق التجارية', 'info@alwifaq.com', '+249911000111', 'system', '10k_25k', 'نحتاج نظام إدارة مخزون ومبيعات متكامل يخدم ثلاثة فروع مع تقارير موحّدة.', 'pending'],
-            ['مؤسسة إعمار للمقاولات', 'projects@iamar.com', '+249912000222', 'system', '25k_50k', 'مطلوب نظام لإدارة المشاريع والمقاولات ومتابعة تنفيذ العقود والمستخلصات.', 'pending'],
-            ['متجر لمسة للأزياء', 'sales@lamsa.store', '+249913000333', 'web_app', '5k_10k', 'نرغب في تطوير متجر إلكتروني عصري مع لوحة تحكم وبوابة دفع محلية.', 'pending'],
-            ['عيادة الشفاء التخصصية', 'clinic@alshifa.sd', '+249914000444', 'system', '10k_25k', 'نظام لإدارة المواعيد والملفات الطبية والفواتير للعيادة.', 'in_review'],
-            ['أكاديمية النخبة التعليمية', 'admin@elite-academy.sd', '+249915000555', 'web_app', '10k_25k', 'منصة تعليمية للحصص المباشرة وإدارة الطلاب والدرجات.', 'approved'],
-            ['مطعم الذواقة', 'contact@aldawaqa.com', '+249916000666', 'mobile_app', '5k_10k', 'تطبيق جوال لاستقبال الطلبات وتوصيلها مع نظام نقاط ولاء.', 'in_progress'],
-            ['فندق النيل الأزرق', 'it@bluenile-hotel.sd', '+249917000777', 'system', 'over_50k', 'نظام متكامل لإدارة الفندق والحجوزات والخدمات والتقارير.', 'completed'],
-            ['شخص - رائد أعمال', 'startup.idea@gmail.com', '+249918000888', 'other', 'under_5k', 'لدي فكرة مبدئية وأحتاج استشارة تقنية لتحديد الخطوات القادمة.', 'rejected'],
+            ['شركة الوفاق التجارية', 'info@alwifaq.com', '+249911000111', 'system', '3_6_months', 'نحتاج نظام إدارة مخزون ومبيعات متكامل يخدم ثلاثة فروع مع تقارير موحّدة.', 'pending'],
+            ['مؤسسة إعمار للمقاولات', 'projects@iamar.com', '+249912000222', 'system', '3_6_months', 'مطلوب نظام لإدارة المشاريع والمقاولات ومتابعة تنفيذ العقود والمستخلصات.', 'pending'],
+            ['متجر لمسة للأزياء', 'sales@lamsa.store', '+249913000333', 'web_app', '1_3_months', 'نرغب في تطوير متجر إلكتروني عصري مع لوحة تحكم وبوابة دفع محلية.', 'pending'],
+            ['عيادة الشفاء التخصصية', 'clinic@alshifa.sd', '+249914000444', 'system', '1_3_months', 'نظام لإدارة المواعيد والملفات الطبية والفواتير للعيادة.', 'in_review'],
+            ['أكاديمية النخبة التعليمية', 'admin@elite-academy.sd', '+249915000555', 'web_app', '3_6_months', 'منصة تعليمية للحصص المباشرة وإدارة الطلاب والدرجات.', 'approved'],
+            ['مطعم الذواقة', 'contact@aldawaqa.com', '+249916000666', 'mobile_app', 'urgent', 'تطبيق جوال لاستقبال الطلبات وتوصيلها مع نظام نقاط ولاء.', 'in_progress'],
+            ['فندق النيل الأزرق', 'it@bluenile-hotel.sd', '+249917000777', 'system', 'flexible', 'نظام متكامل لإدارة الفندق والحجوزات والخدمات والتقارير.', 'completed'],
+            ['شخص - رائد أعمال', 'startup.idea@gmail.com', '+249918000888', 'other', 'flexible', 'لدي فكرة مبدئية وأحتاج استشارة تقنية لتحديد الخطوات القادمة.', 'rejected'],
         ];
 
         foreach ($requests as $i => $data) {
-            [$name, $email, $whatsapp, $type, $budget, $description, $status] = $data;
+            [$name, $email, $whatsapp, $type, $timeline, $description, $status] = $data;
 
             ProjectRequest::firstOrCreate(['email' => $email], [
                 'name' => $name,
                 'whatsapp' => $whatsapp,
                 'project_type' => $type,
-                'budget_range' => $budget,
+                'timeline' => $timeline,
                 'description' => $description,
                 'status' => $status,
                 'is_read' => $i >= 3,

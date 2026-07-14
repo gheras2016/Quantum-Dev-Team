@@ -38,10 +38,10 @@
                         </select>
                     </div>
                     <div>
-                        <label class="form-label" for="budget_range">{{ __('request-project.budget_range') }}</label>
-                        <select id="budget_range" name="budget_range" required class="form-select">
-                            @foreach (__('request-project.budget_ranges') as $value => $label)
-                                <option value="{{ $value }}" @selected(old('budget_range') === $value)>{{ $label }}</option>
+                        <label class="form-label" for="timeline">{{ __('request-project.timeline') }}</label>
+                        <select id="timeline" name="timeline" required class="form-select">
+                            @foreach (__('request-project.timelines') as $value => $label)
+                                <option value="{{ $value }}" @selected(old('timeline') === $value)>{{ $label }}</option>
                             @endforeach
                         </select>
                     </div>

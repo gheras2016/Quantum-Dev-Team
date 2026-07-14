@@ -16,7 +16,7 @@ class ProjectRequestsExport implements FromQuery, WithHeadings, WithMapping
 
     public function headings(): array
     {
-        return ['ID', 'Name', 'Email', 'WhatsApp', 'Project Type', 'Budget', 'Description', 'Status', 'Date'];
+        return ['ID', 'Name', 'Email', 'WhatsApp', 'Project Type', 'Timeline', 'Description', 'Status', 'Date'];
     }
 
     /**
@@ -30,7 +30,7 @@ class ProjectRequestsExport implements FromQuery, WithHeadings, WithMapping
             $request->email,
             $request->whatsapp,
             $request->project_type,
-            $request->budget_range,
+            $request->timeline,
             $request->description,
             $request->status,
             $request->created_at?->format('Y-m-d H:i'),

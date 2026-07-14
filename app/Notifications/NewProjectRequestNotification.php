@@ -29,7 +29,7 @@ class NewProjectRequestNotification extends Notification
             ->line('Email: '.$this->projectRequest->email)
             ->line('WhatsApp: '.($this->projectRequest->whatsapp ?: '—'))
             ->line('Type: '.$this->projectRequest->project_type)
-            ->line('Budget: '.$this->projectRequest->budget_range)
+            ->line('Timeline: '.$this->projectRequest->timeline)
             ->line('Description:')
             ->line($this->projectRequest->description)
             ->action('Open in dashboard', route('admin.project-requests.show', $this->projectRequest));
