@@ -10,7 +10,7 @@
     <div class="w-full max-w-md">
         <div class="mb-6 text-center">
             <div class="mb-3 flex justify-center">
-                <x-site-logo height="h-20" box="h-20 w-20" rounded="rounded-2xl" text="text-4xl" />
+                <x-site-logo height="h-24" box="h-24 w-24" rounded="rounded-2xl" text="text-5xl" />
             </div>
             <h1 class="text-2xl font-bold text-gray-900 dark:text-white">{{ __('messages.admin_login') }}</h1>
             <p class="mt-1 text-sm text-gray-500">{{ __('messages.please_login_to_continue') }}</p>

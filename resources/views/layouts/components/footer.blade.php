@@ -11,7 +11,7 @@
     <div class="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3 lg:px-8">
         <div>
             <div class="mb-4 flex items-center gap-2">
-                <x-site-logo height="h-14" box="h-14 w-14" text="text-2xl" />
+                <x-site-logo height="h-16" box="h-16 w-16" text="text-3xl" />
                 <span class="text-lg font-bold text-white">{{ __('messages.site_name') }}</span>
             </div>
             <p class="mb-5 max-w-xs text-sm text-gray-400">{{ __('messages.tagline') }}</p>
