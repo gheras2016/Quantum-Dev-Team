@@ -126,6 +126,8 @@ return [
     'no_activity_yet' => 'No activity recorded yet.',
     'content_overview' => 'New Content',
     'content_overview_hint' => 'Projects & articles created in the last 6 months',
+    'system_guide' => 'System Guide',
+    'system_guide_hint' => 'An overview of the system, its sections and development phases (PDF)',
 
     // CRUD flash
     'created_successfully' => 'Created successfully.',

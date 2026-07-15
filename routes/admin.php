@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DocumentController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\PostController;
@@ -39,6 +40,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+        // System guide (PDF) downloads.
+        Route::get('docs/{locale}', [DocumentController::class, 'download'])->name('docs.download');
 
         // Profile
         Route::controller(ProfileController::class)->prefix('profile')->name('profile.')->group(function () {

@@ -126,6 +126,8 @@ return [
     'no_activity_yet' => 'لا يوجد نشاط مُسجّل بعد.',
     'content_overview' => 'المحتوى الجديد',
     'content_overview_hint' => 'المشاريع والمقالات المضافة خلال آخر 6 أشهر',
+    'system_guide' => 'دليل النظام',
+    'system_guide_hint' => 'دليل تعريفي بالنظام وأقسامه ومراحل تطويره (PDF)',
 
     // CRUD flash
     'created_successfully' => 'تمت الإضافة بنجاح.',

@@ -32,6 +32,10 @@
             <div class="lg:col-span-2">
                 @if ($project->image)
                     <img src="{{ $project->image_url }}" alt="{{ $project->translate('title') }}" class="mb-8 w-full rounded-2xl object-cover">
+                @else
+                    <x-cover :title="$project->translate('title')" :seed="$project->slug"
+                             :badge="$project->categories->first()?->name"
+                             class="mb-8 h-64 rounded-2xl" />
                 @endif
 
                 <div class="prose max-w-none dark:prose-invert">
