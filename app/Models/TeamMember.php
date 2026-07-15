@@ -61,6 +61,6 @@ class TeamMember extends Model
 
     public function getImageUrlAttribute(): ?string
     {
-        return $this->image ? asset('storage/'.$this->image) : null;
+        return $this->image ? media_url($this->image) : null;
     }
 }

@@ -56,6 +56,10 @@ services:
         value: public
       - key: MAIL_MAILER
         value: log
+      # Persistent image storage (uploads survive redeploys). Set the full
+      # cloudinary://API_KEY:API_SECRET@CLOUD_NAME URL in the dashboard.
+      - key: CLOUDINARY_URL
+        sync: false
       # Run migrations automatically on each deploy (set to false to disable).
       - key: RUN_MIGRATIONS
         value: "true"

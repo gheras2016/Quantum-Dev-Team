@@ -9,7 +9,7 @@
 
 @if ($logo)
     {{-- Uploaded logo: constrain height only so the original aspect ratio and quality are preserved. --}}
-    <img src="{{ asset('storage/'.$logo) }}" alt="{{ __('messages.site_name') }}"
+    <img src="{{ media_url($logo) }}" alt="{{ __('messages.site_name') }}"
          class="{{ $height }} w-auto max-w-[220px] {{ $rounded }} object-contain">
 @else
     <span class="{{ $box }} {{ $rounded }} {{ $text }} flex items-center justify-center bg-gradient-to-br from-primary-600 to-primary-400 font-bold text-white">Q</span>

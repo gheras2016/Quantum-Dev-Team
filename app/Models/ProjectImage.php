@@ -28,6 +28,6 @@ class ProjectImage extends Model
 
     public function getUrlAttribute(): string
     {
-        return asset('storage/'.$this->image_url);
+        return media_url($this->image_url);
     }
 }

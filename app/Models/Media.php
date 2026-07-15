@@ -39,7 +39,7 @@ class Media extends Model
 
     public function getUrlAttribute(): ?string
     {
-        return $this->file_name ? asset('storage/'.$this->file_name) : null;
+        return $this->file_name ? media_url($this->file_name) : null;
     }
 
     public function getHumanSizeAttribute(): string

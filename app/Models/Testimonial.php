@@ -43,7 +43,7 @@ class Testimonial extends Model
 
     public function getAvatarUrlAttribute(): ?string
     {
-        return $this->avatar ? asset('storage/'.$this->avatar) : null;
+        return $this->avatar ? media_url($this->avatar) : null;
     }
 
     public function activityLabel(): string
