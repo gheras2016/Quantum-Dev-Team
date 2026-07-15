@@ -17,4 +17,7 @@ return [
     'views' => 'Views',
     'no_projects' => 'No projects in this category.',
     'related_projects' => 'Related Projects',
+    'similar_cta_title' => 'Interested in a similar system?',
+    'similar_cta_text' => 'We build a custom system tailored to your business needs, to the highest quality standards.',
+    'similar_cta_button' => 'Request Your Project',
 ];

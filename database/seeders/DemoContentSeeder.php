@@ -171,8 +171,6 @@ class DemoContentSeeder extends Seeder
                 'status' => 'published',
                 'featured' => $isFeatured,
                 'views_count' => random_int(120, 1800),
-                'github_url' => 'https://github.com/quantum-dev-team',
-                'demo_url' => 'https://demo.quantum-dev.team/'.$slug,
                 'case_study' => $isFeatured
                     ? 'المشكلة: احتاج العميل إلى أتمتة عملياته اليدوية. الحل: صمّمنا وطوّرنا '.$titleAr.' بواجهات سهلة وتقارير دقيقة. النتيجة: تقليل الوقت والأخطاء ورفع الكفاءة التشغيلية بشكل ملحوظ.'
                     : null,

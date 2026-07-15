@@ -85,19 +85,13 @@
                     </div>
                 @endif
 
-                @if ($project->demo_url || $project->github_url || $project->documentation_url)
-                    <div class="card space-y-2">
-                        @if ($project->demo_url)
-                            <a href="{{ $project->demo_url }}" target="_blank" rel="noopener" class="btn-primary w-full text-sm">{{ __('projects.view_live') }}</a>
-                        @endif
-                        @if ($project->github_url)
-                            <a href="{{ $project->github_url }}" target="_blank" rel="noopener" class="btn-secondary w-full text-sm">{{ __('projects.view_code') }}</a>
-                        @endif
-                        @if ($project->documentation_url)
-                            <a href="{{ $project->documentation_url }}" target="_blank" rel="noopener" class="btn-secondary w-full text-sm">{{ __('projects.documentation') }}</a>
-                        @endif
-                    </div>
-                @endif
+                {{-- Lead CTA: client systems are private, so instead of demo/source
+                     links we invite the visitor to request a similar system. --}}
+                <div class="rounded-2xl bg-gradient-to-br from-primary-600 to-primary-800 p-6 text-white shadow-sm">
+                    <h3 class="font-semibold">{{ __('projects.similar_cta_title') }}</h3>
+                    <p class="mt-2 text-sm leading-relaxed text-primary-100">{{ __('projects.similar_cta_text') }}</p>
+                    <a href="{{ route('request-project') }}" class="btn-white mt-4 w-full justify-center text-sm">{{ __('projects.similar_cta_button') }}</a>
+                </div>
             </aside>
         </div>
 
