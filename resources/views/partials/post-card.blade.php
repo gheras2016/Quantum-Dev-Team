@@ -4,7 +4,7 @@
             <img src="{{ $post->image_url }}" alt="{{ $post->translate('title') }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110">
         @else
             <x-cover :title="$post->translate('title')" :seed="$post->slug"
-                     class="transition-transform duration-500 group-hover:scale-110" />
+                     class="h-full w-full transition-transform duration-500 group-hover:scale-110" />
         @endif
     </div>
     <div class="p-6">

@@ -4,7 +4,7 @@
             <img src="{{ $project->image_url }}" alt="{{ $project->translate('title') }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110">
         @else
             <x-cover :title="$project->translate('title')" :seed="$project->slug"
-                     class="transition-transform duration-500 group-hover:scale-110" />
+                     class="h-full w-full transition-transform duration-500 group-hover:scale-110" />
         @endif
         @if ($project->featured)
             <span class="badge absolute end-3 top-3 bg-yellow-400/95 text-yellow-900">{{ __('messages.featured') }}</span>

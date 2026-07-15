@@ -24,7 +24,7 @@
             @if ($post->image)
                 <img src="{{ $post->image_url }}" alt="{{ $post->translate('title') }}" class="mt-8 w-full rounded-2xl object-cover">
             @else
-                <x-cover :title="$post->translate('title')" :seed="$post->slug" class="mt-8 h-56 rounded-2xl" />
+                <x-cover :title="$post->translate('title')" :seed="$post->slug" class="mt-8 h-56 w-full rounded-2xl" />
             @endif
 
             <div class="prose mt-8 max-w-none dark:prose-invert">

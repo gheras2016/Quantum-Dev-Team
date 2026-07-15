@@ -16,7 +16,7 @@
     [$c1, $c2] = $palettes[abs(crc32($seed !== '' ? $seed : $title)) % count($palettes)];
 @endphp
 
-<div {{ $attributes->merge(['class' => 'relative flex h-full w-full items-center justify-center overflow-hidden']) }}
+<div {{ $attributes->merge(['class' => 'relative flex items-center justify-center overflow-hidden']) }}
      style="background-image: linear-gradient(135deg, {{ $c1 }} 0%, {{ $c2 }} 100%);">
     {{-- subtle texture --}}
     <div class="absolute inset-0 bg-grid-pattern opacity-20"></div>
