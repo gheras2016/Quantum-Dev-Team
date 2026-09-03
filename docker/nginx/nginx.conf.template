@@ -39,6 +39,14 @@ http {
 
         charset utf-8;
 
+        # Platform health check — served directly by Nginx with no PHP/DB
+        # dependency, so it stays green even while the app is booting/migrating.
+        location = /health {
+            access_log off;
+            add_header Content-Type text/plain;
+            return 200 "healthy\n";
+        }
+
         # Front controller pattern — everything routes through index.php.
         location / {
             try_files $uri $uri/ /index.php?$query_string;

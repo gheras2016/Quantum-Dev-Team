@@ -4,13 +4,17 @@
 # the CMD (supervisord).
 set -e
 
-# Render provides $PORT; default to 8080 for local `docker run`.
+# The platform (Render / Railway) provides $PORT; default to 8080 locally.
 : "${PORT:=8080}"
 export PORT
 envsubst '${PORT}' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
 mkdir -p /run/nginx
 
 cd /var/www/html
+
+# Fail fast (instead of hanging) if the database is unreachable, so a
+# mis-configured DATABASE_URL never blocks Nginx from starting.
+export PGCONNECT_TIMEOUT=15
 
 # --- Ensure a valid application key ---------------------------------------
 # Laravel throws MissingAppKeyException (HTTP 500) on EVERY request when
