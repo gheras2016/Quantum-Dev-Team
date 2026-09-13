@@ -25,7 +25,7 @@ RUN set -eux; \
         libwebp-dev libzip-dev icu-dev oniguruma-dev; \
     docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp; \
     docker-php-ext-install -j"$(nproc)" \
-        pdo_pgsql pgsql gd zip mbstring bcmath exif pcntl intl opcache; \
+        pdo_pgsql pgsql pdo_mysql mysqli gd zip mbstring bcmath exif pcntl intl opcache; \
     apk del .build-deps
 
 # Pinned Composer binary (PHAR). It executes with the PHP of the image it runs
