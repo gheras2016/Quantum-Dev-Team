@@ -1,9 +1,0 @@
-[build]
-builder = "NIXPACKS"
-
-[deploy]
-# On each deploy: migrate + storage symlink, then CACHE config/routes/views
-# (much faster bootstrap per request), start the scheduler in the background,
-# then serve. NOTE: `php artisan serve` is single-threaded — see docs/PERFORMANCE.md
-# for moving to a concurrent server (the real throughput fix).
-startCommand = "php artisan migrate --force && php artisan storage:link --force && php artisan config:cache && php artisan route:cache && php artisan view:cache && (php artisan schedule:work &) && php artisan serve --host=0.0.0.0 --port=$PORT"
