@@ -5,6 +5,7 @@
     },
     "deploy": {
         "preDeployCommand": "php artisan migrate --force && php artisan db:seed --force",
+        "startCommand": "php artisan storage:link --force && php artisan config:cache && php artisan route:cache && php artisan view:cache && (php artisan schedule:work &) && php artisan serve --host=0.0.0.0 --port=$PORT",
         "healthcheckPath": "/",
         "healthcheckTimeout": 300,
         "restartPolicyType": "ON_FAILURE",
