@@ -46,6 +46,10 @@
     </div>
 
     <div class="border-t border-white/10 py-6 text-center text-sm text-gray-500">
-        &copy; {{ date('Y') }} {{ __('messages.site_name') }}.
+        <p>&copy; {{ date('Y') }} {{ __('messages.site_name') }}.</p>
+        <p class="mt-2 flex flex-wrap justify-center gap-x-5 gap-y-1">
+            <a href="{{ route('privacy') }}" class="transition-colors hover:text-primary-400">{{ __('legal.privacy.title') }}</a>
+            <a href="{{ route('terms') }}" class="transition-colors hover:text-primary-400">{{ __('legal.terms.title') }}</a>
+        </p>
     </div>
 </footer>
