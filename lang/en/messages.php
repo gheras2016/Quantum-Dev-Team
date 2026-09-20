@@ -88,6 +88,7 @@ return [
     'users' => 'Users',
     'roles' => 'Roles',
     'trash' => 'Trash',
+    'backup' => 'Backup',
     'restore' => 'Restore',
     'permanently_delete' => 'Delete permanently',
     'deleted_at' => 'Deleted At',

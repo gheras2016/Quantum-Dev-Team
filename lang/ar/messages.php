@@ -88,6 +88,7 @@ return [
     'users' => 'المستخدمون',
     'roles' => 'الأدوار',
     'trash' => 'سلة المحذوفات',
+    'backup' => 'النسخ الاحتياطي',
     'restore' => 'استعادة',
     'permanently_delete' => 'حذف نهائي',
     'deleted_at' => 'تاريخ الحذف',

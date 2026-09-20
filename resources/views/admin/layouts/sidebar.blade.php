@@ -59,6 +59,14 @@
                 <span class="flex-1">{{ __('messages.settings') }}</span>
             </a>
         @endcan
+
+        @role('super_admin')
+            <a href="{{ route('admin.backup.index') }}"
+               class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors {{ request()->routeIs('admin.backup.*') ? 'bg-primary-600 text-white' : 'hover:bg-white/5 hover:text-white' }}">
+                <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/></svg>
+                <span class="flex-1">{{ __('messages.backup') }}</span>
+            </a>
+        @endrole
     </nav>
 
     <div class="border-t border-white/5 p-3">

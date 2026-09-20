@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\BackupController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -55,6 +56,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::controller(SettingController::class)->prefix('settings')->name('settings.')->group(function () {
             Route::get('/', 'edit')->middleware('permission:view_settings')->name('edit');
             Route::put('/', 'update')->middleware('permission:edit_settings')->name('update');
+        });
+
+        // Full database backup & restore (super admin only)
+        Route::controller(BackupController::class)->prefix('backup')->name('backup.')->middleware('role:super_admin')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('export', 'export')->name('export');
+            Route::post('import', 'import')->name('import');
         });
 
         // Resource management
