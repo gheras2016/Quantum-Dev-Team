@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
 use App\Models\User;
+use App\Services\ActivityService;
 use App\Services\Admin\UserService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -50,6 +51,25 @@ class UserController extends Controller
         $this->users->update($user, $request->validated());
 
         return redirect()->route('admin.users.index')->with('success', __('messages.updated_successfully'));
+    }
+
+    /**
+     * Clear a user's two-factor setup — an account-recovery action for when
+     * they lose both their authenticator device and their recovery codes.
+     */
+    public function resetTwoFactor(User $user, ActivityService $activity): RedirectResponse
+    {
+        $this->authorize('update', $user);
+
+        $user->forceFill([
+            'two_factor_secret' => null,
+            'two_factor_recovery_codes' => null,
+            'two_factor_confirmed_at' => null,
+        ])->save();
+
+        $activity->log('Reset two-factor authentication for '.$user->email, Auth::user());
+
+        return redirect()->route('admin.users.edit', $user)->with('success', __('two-factor.admin_reset_done'));
     }
 
     public function destroy(User $user): RedirectResponse

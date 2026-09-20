@@ -90,6 +90,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('categories', CategoryController::class)->except('show');
         Route::resource('social-links', SocialLinkController::class)->except('show');
         Route::resource('users', UserController::class)->except('show');
+        Route::delete('users/{user}/reset-two-factor', [UserController::class, 'resetTwoFactor'])->name('users.reset-two-factor');
 
         // Media (gallery item deletion)
         Route::delete('media/{media}', [MediaController::class, 'destroy'])->name('media.destroy');

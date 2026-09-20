@@ -37,4 +37,10 @@ return [
     'enabled' => 'Two-factor authentication has been enabled.',
     'disabled' => 'Two-factor authentication has been disabled.',
     'invalid_code' => 'The provided code is invalid.',
+
+    // Admin reset (recovering a locked-out user)
+    'admin_reset_hint' => 'If this user has lost both their authenticator device and recovery codes, reset their two-factor setup so they can log in with just their password and enrol again.',
+    'admin_reset_button' => 'Reset two-factor for this user',
+    'admin_reset_confirm' => 'Reset two-factor authentication for this user? They will be able to log in with only their password until they set it up again.',
+    'admin_reset_done' => "The user's two-factor authentication has been reset.",
 ];
