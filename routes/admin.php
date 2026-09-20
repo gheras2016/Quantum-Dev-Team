@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\Auth\TwoFactorChallengeController;
 use App\Http\Controllers\Admin\BackupController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SocialLinkController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\TechnologyController;
+use App\Http\Controllers\Admin\TwoFactorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +37,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
         Route::post('login', [LoginController::class, 'login'])->middleware('throttle:5,1');
+
+        // Two-factor challenge (second login step — user is not yet authenticated).
+        Route::get('two-factor-challenge', [TwoFactorChallengeController::class, 'show'])->name('two-factor.challenge');
+        Route::post('two-factor-challenge', [TwoFactorChallengeController::class, 'store'])->name('two-factor.verify')->middleware('throttle:6,1');
     });
 
     Route::middleware('admin')->group(function () {
@@ -50,6 +56,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/', 'edit')->name('edit');
             Route::put('/', 'update')->name('update');
             Route::put('password', 'updatePassword')->name('password');
+        });
+
+        // Two-factor authentication (self-service — any admin can manage their own)
+        Route::controller(TwoFactorController::class)->prefix('two-factor')->name('two-factor.')->group(function () {
+            Route::post('enable', 'enable')->name('enable');
+            Route::post('confirm', 'confirm')->name('confirm');
+            Route::post('recovery-codes', 'regenerate')->name('recovery-codes');
+            Route::delete('/', 'disable')->name('disable');
         });
 
         // Site settings (admins only)

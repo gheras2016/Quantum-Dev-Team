@@ -39,6 +39,17 @@ class LoginController extends Controller
             return back()->withErrors(['email' => __('messages.unauthorized')]);
         }
 
+        // Password accepted — if the account has 2FA enabled, hold the session
+        // (unauthenticated) until the second factor is verified on the challenge.
+        if (Auth::user()->hasTwoFactorEnabled()) {
+            $userId = Auth::id();
+            Auth::logout();
+            $request->session()->put('auth.2fa.id', $userId);
+            $request->session()->put('auth.2fa.remember', $request->boolean('remember'));
+
+            return redirect()->route('admin.two-factor.challenge');
+        }
+
         $request->session()->regenerate();
         $this->activity->log('Admin login', Auth::user());
 
