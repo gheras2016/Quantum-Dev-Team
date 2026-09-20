@@ -7,6 +7,37 @@
     @section('og_image', $post->image_url)
 @endif
 
+@php
+    $articleLd = array_filter([
+        '@context' => 'https://schema.org',
+        '@type' => 'BlogPosting',
+        'headline' => $post->translate('title'),
+        'description' => \Illuminate\Support\Str::limit(strip_tags($post->translate('excerpt') ?: $post->translate('body')), 200),
+        'image' => $post->image ? $post->image_url : null,
+        'datePublished' => optional($post->published_at)->toIso8601String(),
+        'dateModified' => optional($post->updated_at)->toIso8601String(),
+        'author' => ['@type' => 'Person', 'name' => $post->user?->name ?: __('messages.site_name')],
+        'publisher' => ['@id' => url('/').'#organization'],
+        'mainEntityOfPage' => url()->current(),
+        'inLanguage' => app()->getLocale(),
+    ]);
+
+    $breadcrumbLd = [
+        '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            ['@type' => 'ListItem', 'position' => 1, 'name' => __('navigation.home'), 'item' => route('home')],
+            ['@type' => 'ListItem', 'position' => 2, 'name' => __('blog.title'), 'item' => route('blog')],
+            ['@type' => 'ListItem', 'position' => 3, 'name' => $post->translate('title'), 'item' => url()->current()],
+        ],
+    ];
+@endphp
+
+@push('structured-data')
+    <script type="application/ld+json">{!! json_encode($articleLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}</script>
+    <script type="application/ld+json">{!! json_encode($breadcrumbLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}</script>
+@endpush
+
 @section('content')
     <article class="section">
         <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">

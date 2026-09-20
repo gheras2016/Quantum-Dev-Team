@@ -22,6 +22,9 @@
     <meta name="twitter:title" content="@yield('title', __('messages.site_name'))">
     <meta name="twitter:description" content="@yield('meta_description', __('messages.tagline'))">
 
+    {{-- SEO: schema.org structured data (Organization + WebSite, plus per-page graphs) --}}
+    @include('partials.structured-data')
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen bg-gray-50 font-sans text-gray-900 transition-colors duration-300 dark:bg-dark-300 dark:text-gray-100">
